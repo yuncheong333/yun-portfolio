@@ -1,0 +1,56 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+.main-container {
+    position: fixed; /* 전체 화면 고정 */
+    top: 60px; /* 헤더 높이만큼 내려줌 */
+    width: 100vw;
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* 배경 애니메이션 */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 110% auto; /* 이미지를 살짝 확대 */
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(20px);
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden; /* 혹시 넘치는 부분이 있으면 가리기 */
+}
+
+/* 컨텐츠 */
+.content {
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* 환영 텍스트 */
+.welcome-text {
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* 중앙 이미지 */
+.main-image {
+    width: 250px;
+    height: auto;
+    margin-top: 20px;
+}

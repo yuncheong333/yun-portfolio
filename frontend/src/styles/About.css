@@ -1,0 +1,31 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+
+.about-container {
+    position: fixed; /* 전체 화면 고정 */
+    top: 60px; /* 헤더 높이만큼 내려줌 */
+    width: 100vw;
+    height: calc(100vh - 120px);
+
+    flex-direction: column;
+
+    overflow: hidden;
+    z-index: 1;
+}
+.about-content {
+    margin: 0;
+    top : 20px;
+    left : 20px;
+    position: relative;
+    z-index: 2;
+
+}
+.name-intro {
+    margin: 0;
+
+}

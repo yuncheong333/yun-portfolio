@@ -1,0 +1,33 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height : 60px;
+    min-height: 60px; /* 기본 높이는 유지하면서 필요하면 늘어나도록 설정 */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* 내용이 많아지면 자동 줄바꿈 */
+    font-size: 14px;
+    z-index: 1000;
+    padding: 10px 0; /* 위아래 패딩 추가 */
+    box-sizing: border-box;
+}
+
+.footer-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* <p> 태그 스타일 */
+.footer-content p {
+    margin: 5px 0; /* 위아래 간격 조정 */
+    white-space: nowrap; /* 한 줄 유지 (줄바꿈 방지) */
+}

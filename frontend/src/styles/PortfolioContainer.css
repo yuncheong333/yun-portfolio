@@ -1,0 +1,9 @@
+.portfolio-contents > * {
+    padding: 20px;
+    border-bottom: 1px solid #ccc; /* 구분선 추가 */
+}
+
+/* 마지막 요소의 구분선 제거 */
+.portfolio-contents > *:last-child {
+    border-bottom: none;
+}

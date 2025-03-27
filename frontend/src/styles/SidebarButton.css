@@ -1,0 +1,12 @@
+/* 사이드바 버튼 (왼쪽 고정) */
+.sidebar-toggle {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+}
