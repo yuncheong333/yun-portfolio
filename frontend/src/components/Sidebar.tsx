@@ -7,20 +7,20 @@ const Sidebar: React.FC = () => {
     const { isSidebarOpen, toggleSidebar } = useSidebar();
     const navigate = useNavigate();
 
-    const handleAboutClick = () => {
+    const handleLinkClick = (path: string) => {
         toggleSidebar(); // 사이드바 닫기
         setTimeout(() => {
-            navigate("/about"); // About 페이지로 이동
-        }, 300); // 애니메이션 시간 동안 대기 후 이동
+            navigate(path); // About 페이지로 이동
+        }, 250); // 애니메이션 시간 동안 대기 후 이동
     };
 
     return (
         <nav className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
             <ul>
-                <li onClick={() => navigate("/")}>🏠 Home</li>
-                <li onClick={handleAboutClick}>📌 About</li>
-                <li onClick={() => navigate("/posts")}>📑 Posts</li>
-                <li onClick={() => navigate("/contact")}>📬 Contact</li>
+                <li onClick={() => handleLinkClick("/")}>🏠 Home</li>
+                <li onClick={() => handleLinkClick("/about")}>📌 About</li>
+                <li onClick={() => handleLinkClick("/posts")}>📑 Posts</li>
+                <li onClick={() => handleLinkClick("/contact")}>📬 Contact</li>
             </ul>
         </nav>
     );

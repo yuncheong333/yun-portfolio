@@ -11,6 +11,13 @@
     color: white;
 }
 
+.sidebar-toggle-container {
+    height: 100%;
+    width: 60px;
+    display: flex;
+
+}
+
 .sidebar-toggle {
     position: fixed;
     left: 10px;
@@ -27,11 +34,32 @@
     display: flex;
     justify-content: flex-start; /* 왼쪽 정렬 */
     align-items: center; /* 수직 중앙 정렬 */
-    margin-left: 60px; /* 왼쪽에 적당한 여백 추가 */
+
 }
 
 .logo {
     max-height: 60%; /* 헤더 높이에 맞춤 */
     width: auto;
     cursor: pointer;
+}
+
+.loginpage-button-container {
+    height: 100%;
+    width: 60px;
+    display: flex; /* 플렉스박스 적용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    position: absolute; /* 부모 요소 내에서 절대 위치 */
+    right: 0; /* 오른쪽 끝에 배치 */
+}
+.loginpage-button {
+    display: flex;
+    justify-content: center; /* 왼쪽 정렬 */
+    align-items: center;
+    background-color: transparent;
+        border: none;
+        font-size: 24px; /* 아이콘 크기 */
+        cursor: pointer;
+        color: #ffffff;
+
 }

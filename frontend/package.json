@@ -12,6 +12,7 @@
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "axios": "^1.8.4",
+    "bootstrap-icons": "^1.11.3",
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

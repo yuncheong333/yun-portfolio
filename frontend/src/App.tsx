@@ -9,6 +9,9 @@ import Footer from "./components/Footer";
 import "./styles/App.css";
 import Main from "./pages/Main";
 import About from "./pages/About";
+import Login from "./pages/Login";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 
 
@@ -21,6 +24,7 @@ const App: React.FC = () => {
                 <Routes> {/* Routes로 감싸서 각 경로 설정 */}
                     <Route path="/" element={<Main />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
                 <Footer />
             </SidebarProvider>
