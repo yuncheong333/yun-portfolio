@@ -18,6 +18,7 @@ html, body {
     z-index: 1;
 }
 
+
 /* 배경 애니메이션 */
 .background {
     position: absolute;
@@ -32,6 +33,7 @@ html, body {
     z-index: -1;
     pointer-events: none;
     overflow: hidden; /* 혹시 넘치는 부분이 있으면 가리기 */
+
 }
 
 /* 컨텐츠 */
@@ -54,3 +56,4 @@ html, body {
     height: auto;
     margin-top: 20px;
 }
+

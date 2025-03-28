@@ -14,7 +14,7 @@ html, body {
 
     flex-direction: column;
 
-    overflow: hidden;
+    overflow: auto;
     z-index: 1;
 }
 .about-content {
@@ -28,4 +28,7 @@ html, body {
 .name-intro {
     margin: 0;
 
+}
+img {
+    will-change: transform, opacity;
 }
