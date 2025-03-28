@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "../styles/Main.css";
 import yuncheongImg from "../assets/yuncheong-black.png";
-import bgImage from "../assets/background.jpg";
+import bgImage from "../assets/background1.webp";
 
 const Main = () => {
     return (
@@ -11,9 +11,9 @@ const Main = () => {
             <motion.div
                 className="background"
                 style={{backgroundImage: `url(${bgImage})`}} // 배경 이미지 설정
-                initial={{scale: 1.2, opacity: 0.5}}  // 처음에는 확대된 상태
+                initial={{scale: 1.1, opacity: 0.5}}  // 처음에는 확대된 상태
                 whileInView={{scale: 1, opacity: 0.7}} // 화면에 보일 때 최종 상태로 변경
-                transition={{duration: 3}} // 3초 동안 실행
+                transition={{duration: 3}} // 2초 동안 실행
             ></motion.div>
 
 
