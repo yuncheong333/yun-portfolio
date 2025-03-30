@@ -13,8 +13,16 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
+
     "module": "esnext",
+
     "moduleResolution": "node",
+
+    //새로추가
+    "paths": {
+      "ckeditor5/translations/*": ["./node_modules/ckeditor5/dist/translations/*"]
+    },
+
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,

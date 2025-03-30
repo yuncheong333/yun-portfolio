@@ -5,9 +5,7 @@ html, body {
     overflow-x: hidden;/* 가로 스크롤 방지 */
     box-sizing: border-box
 }
-
-
-.about-container {
+.login-container {
     position: fixed; /* 전체 화면 고정 */
     top: 60px; /* 헤더 높이만큼 내려줌 */
     width: 100%;
@@ -17,19 +15,4 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 1;
-}
-.about-content {
-    margin: 0;
-    top : 20px;
-    left : 20px;
-    position: relative;
-    z-index: 2;
-
-}
-.name-intro {
-    margin: 0;
-
-}
-img {
-    will-change: transform, opacity;
 }

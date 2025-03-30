@@ -1,0 +1,11 @@
+.post-container {
+    position: fixed; /* 전체 화면 고정 */
+    top: 60px; /* 헤더 높이만큼 내려줌 */
+    width: 100%;
+    height: calc(100vh - 120px);
+
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+}
