@@ -11,11 +11,15 @@ import Main from "./pages/Main";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import PostEditor from "./components/PostEditor";
+import Posts from "./pages/Posts";
 
 
 
 
 const App: React.FC = () => {
+
+
     return (
         <Router> {/* BrowserRouter로 감싸기 */}
             <SidebarProvider>
@@ -25,6 +29,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Main />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/posts" element={<Posts/>} />
                 </Routes>
                 <Footer />
             </SidebarProvider>
