@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import PostEditor from "./components/PostEditor";
 import Posts from "./pages/Posts";
+import Resister from "./pages/Register";
+import Register from "./pages/Register";
 
 
 
@@ -30,6 +32,7 @@ const App: React.FC = () => {
                     <Route path="/about" element={<About />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/posts" element={<Posts/>} />
+                    <Route path="/register" element={<Register />} /> {/* /register 경로 추가 */}
                 </Routes>
                 <Footer />
             </SidebarProvider>
