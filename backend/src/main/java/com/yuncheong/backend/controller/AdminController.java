@@ -40,27 +40,27 @@ public class AdminController {
         adminService.changePassword(adminId, request);
         return ResponseEntity.ok().build();
     }
-
-    // 회원가입 처리
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-    @Autowired
-    private AdminRepository adminRepository;
-
-    @PostMapping("/register")
-    public String signup(@RequestBody AdminEntity admin) {
-        // 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(admin.getPassword());
-
-        // 비밀번호를 암호화된 값으로 변경
-        admin.changePassword(encodedPassword);
-
-        // 생성일 설정
-
-
-        // DB에 저장
-        adminRepository.save(admin);
-
-        return "회원가입 완료!";
-    }
+//
+//    // 회원가입 처리
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
+//    @Autowired
+//    private AdminRepository adminRepository;
+//
+//    @PostMapping("/register")
+//    public String signup(@RequestBody AdminEntity admin) {
+//        // 비밀번호 암호화
+//        String encodedPassword = passwordEncoder.encode(admin.getPassword());
+//
+//        // 비밀번호를 암호화된 값으로 변경
+//        admin.changePassword(encodedPassword);
+//
+//        // 생성일 설정
+//
+//
+//        // DB에 저장
+//        adminRepository.save(admin);
+//
+//        return "회원가입 완료!";
+//    }
 }
