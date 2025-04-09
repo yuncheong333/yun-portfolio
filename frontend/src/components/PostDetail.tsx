@@ -10,7 +10,7 @@ interface Post {
     createdAt: string;
     updatedAt: string;
 }
-
+//추가 해줘야할거 axios 토큰부여
 const PostDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
