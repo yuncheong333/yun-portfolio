@@ -4,6 +4,7 @@ import com.yuncheong.backend.security.JwtAuthenticationFilter;
 import com.yuncheong.backend.security.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,8 +54,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/admin/login",
-                                "/api/admin/register" // ✅ 회원가입 경로 추가
+                                "/api/admin/register"
                         ).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(

@@ -1,17 +1,13 @@
 import React from "react";
 import "../styles/Posts.css";
-import PostEditor from "../components/PostEditor";
+
+import PostList from "../components/PostList";
+
 
 const Posts: React.FC = () => {
     return (
         <div className="post-container">
-            <p>관리자 로그인</p>
-            <p>관리자 로그인</p>
-            <p>관리자 로그인</p>
-            <p>관리자 로그인</p>
-            <p>관리자 로그인</p>
-
-            <PostEditor></PostEditor>
+        <PostList></PostList>
         </div>
     );
 };

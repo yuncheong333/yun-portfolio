@@ -70,9 +70,9 @@ const Login: React.FC = () => {
                             />
                             <label htmlFor="remember">로그인 상태 유지</label>
                         </div>
-                        <a href="/forgot-password" className="forgot-password">
-                            비밀번호 찾기
-                        </a>
+                        {/*<a href="/forgot-password" className="forgot-password">*/}
+                        {/*    비밀번호 찾기*/}
+                        {/*</a>*/}
                     </div>
 
                     <button type="submit" className="login-button">
@@ -80,9 +80,9 @@ const Login: React.FC = () => {
                     </button>
                 </form>
 
-                <div className="login-footer">
-                    <p>계정이 없으신가요? <a href="/register">관리자 계정 요청</a></p>
-                </div>
+                {/*<div className="login-footer">*/}
+                {/*    <p>계정이 없으신가요? <a href="/register">관리자 계정 요청</a></p>*/}
+                {/*</div>*/}
             </div>
         </div>
     );
