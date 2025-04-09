@@ -1,15 +1,30 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
+import axios from "axios";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {  // async로 선언
         e.preventDefault();
-        // 로그인 처리 로직
-        console.log({ email, password, rememberMe });
+        try {
+            const response = await axios.post("http://localhost:8080/api/admin/login", {
+                email: email,
+                password: password,
+                rememberMe: rememberMe,
+            });
+
+            // JWT 토큰 저장
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("adminId", response.data.adminId);
+            alert("로그인 성공!");
+            window.location.href = "/";
+        } catch (error) {
+            console.log({ email, password })
+            alert("로그인 실패! 아이디 또는 비밀번호를 확인하세요.");
+            console.error("로그인 오류:", error);
+        }
     };
 
     return (
@@ -55,9 +70,9 @@ const Login: React.FC = () => {
                             />
                             <label htmlFor="remember">로그인 상태 유지</label>
                         </div>
-                        <a href="/forgot-password" className="forgot-password">
-                            비밀번호 찾기
-                        </a>
+                        {/*<a href="/forgot-password" className="forgot-password">*/}
+                        {/*    비밀번호 찾기*/}
+                        {/*</a>*/}
                     </div>
 
                     <button type="submit" className="login-button">
@@ -65,9 +80,9 @@ const Login: React.FC = () => {
                     </button>
                 </form>
 
-                <div className="login-footer">
-                    <p>계정이 없으신가요? <a href="/register">관리자 계정 요청</a></p>
-                </div>
+                {/*<div className="login-footer">*/}
+                {/*    <p>계정이 없으신가요? <a href="/register">관리자 계정 요청</a></p>*/}
+                {/*</div>*/}
             </div>
         </div>
     );
