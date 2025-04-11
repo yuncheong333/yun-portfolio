@@ -18,11 +18,18 @@ public class AdminDTO {
         private boolean rememberMe;
     }
 
+    @Getter @Setter
+    public static class RefreshRequest {
+        @NotBlank
+        private String refreshToken;
+    }
+
     @Getter @Builder
     public static class LoginResponse {
         private Long adminId;
         private String email;
         private String accessToken;
+        private String refreshToken;
     }
 
     @Getter @Setter

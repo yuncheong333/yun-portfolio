@@ -1,4 +1,5 @@
 package com.yuncheong.backend.security;
+import com.yuncheong.backend.exception.JwtAuthenticationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,17 +25,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String token = resolveToken(request);
+        try {
+            String token = resolveToken(request);
 
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            Long adminId = jwtTokenProvider.getAdminIdFromToken(token);
-            // SecurityContext에 인증 정보 저장
-            SecurityContextHolder.getContext().setAuthentication(
-                    new UsernamePasswordAuthenticationToken(adminId, null, Collections.emptyList())
-            );
+            if (token != null && jwtTokenProvider.validateToken(token)) {
+                Long adminId = jwtTokenProvider.getAdminIdFromToken(token);
+                SecurityContextHolder.getContext().setAuthentication(
+                        new UsernamePasswordAuthenticationToken(adminId, null, Collections.emptyList())
+                );
+            }
+            filterChain.doFilter(request, response);
+        } catch (JwtAuthenticationException ex) {
+            SecurityContextHolder.clearContext();
+            throw new JwtAuthenticationException(ex.getMessage());
         }
-        filterChain.doFilter(request, response);
     }
+
 
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");

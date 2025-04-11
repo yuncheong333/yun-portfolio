@@ -39,4 +39,10 @@ public class AdminEntity {
     public void changePassword(String encryptedPassword) {
         this.password = encryptedPassword;
     }
+    @Column(name = "refresh_token", length = 1000)
+    private String refreshToken;
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

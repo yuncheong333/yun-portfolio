@@ -20,7 +20,9 @@ logging:
     com.yuncheong.backend: DEBUG
   file:
     name: logs/application.log
+
 jwt:
   secret: bXlTdXBlclNlY3VyZUtleUZvckhTNTEyQWxnb3JpdGhtV2l0aFN1ZmZpY2llbnRCaXRzTGVuZ3RoMTIzNDU2Nzg5MA==
   expiration: 86400000  # 24시간 (ms)
   remember-me-expiration: 2592000000  # 30일 (ms)
+  refresh-expiration: 604800000 # 7일 (ms)

@@ -54,7 +54,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/admin/login",
-                                "/api/admin/register"
+                                "/api/admin/register","/api/admin/refresh"
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll() // 조회는 누구나
                         .requestMatchers(HttpMethod.POST, "/api/posts").authenticated()
