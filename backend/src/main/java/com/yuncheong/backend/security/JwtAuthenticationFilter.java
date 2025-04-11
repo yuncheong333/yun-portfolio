@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -29,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Long adminId = jwtTokenProvider.getAdminIdFromToken(token);
             // SecurityContext에 인증 정보 저장
             SecurityContextHolder.getContext().setAuthentication(
-                    new UsernamePasswordAuthenticationToken(adminId, null, List.of())
+                    new UsernamePasswordAuthenticationToken(adminId, null, Collections.emptyList())
             );
         }
         filterChain.doFilter(request, response);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/auth';
 
 interface Post {
     id: number;
@@ -11,16 +11,20 @@ interface Post {
     updatedAt: string;
 }
 //추가 해줘야할거 axios 토큰부여
+
+
 const PostDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [post, setPost] = useState<Post | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+
+    // 게시글 조회 (인증 불필요)
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`/api/posts/${id}`);
+                const response = await api.get(`/posts/${id}`);
                 setPost(response.data);
             } catch (error) {
                 console.error('Error fetching post:', error);
@@ -31,15 +35,37 @@ const PostDetail = () => {
         fetchPost();
     }, [id]);
 
+    // 삭제 처리 (인증 필요)
     const handleDelete = async () => {
-        if (window.confirm('정말 삭제하시겠습니까?')) {
-            try {
-                await axios.delete(`/api/posts/${id}`);
-                navigate('/posts');
-            } catch (error) {
-                console.error('Error deleting post:', error);
+        const token = localStorage.getItem('accessToken');
+
+        if (!token) {
+            if (window.confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+                navigate('/login');
             }
+            return;
         }
+
+        if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+        try {
+            await api.delete(`/posts/${id}`);
+            navigate('/posts');
+        } catch (error) {
+            console.error('Delete failed:', error);
+        }
+    };
+
+
+    // 수정 페이지 진입 전 토큰 확인 (선택사항)
+    const handleEdit = () => {
+        if (!localStorage.getItem('accessToken')) {
+            if (window.confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+                navigate('/login');
+            }
+            return;
+        }
+        navigate(`/posts/${id}/edit`);
     };
 
     if (isLoading) return <div>Loading...</div>;
@@ -69,23 +95,25 @@ const PostDetail = () => {
 
                 <div
                     className="prose max-w-none"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
+                    dangerouslySetInnerHTML={{__html: post.content}}
                 />
 
-                <div className="flex justify-end space-x-3 mt-8">
-                    <button
-                        onClick={() => navigate(`/posts/${id}/edit`)}
-                        className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                    >
-                        수정
-                    </button>
-                    <button
-                        onClick={handleDelete}
-                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                    >
-                        삭제
-                    </button>
-                </div>
+                {localStorage.getItem('accessToken') && (
+                    <div className="flex justify-end space-x-3 mt-8">
+                        <button
+                            onClick={handleEdit}
+                            className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                        >
+                            수정
+                        </button>
+                        <button
+                            onClick={handleDelete}
+                            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        >
+                            삭제
+                        </button>
+                    </div>
+                )}
             </article>
         </div>
     );

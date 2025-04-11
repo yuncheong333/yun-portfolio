@@ -56,7 +56,10 @@ public class SecurityConfig {
                                 "/api/admin/login",
                                 "/api/admin/register"
                         ).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll() // 조회는 누구나
+                        .requestMatchers(HttpMethod.POST, "/api/posts").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/posts/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/posts/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
