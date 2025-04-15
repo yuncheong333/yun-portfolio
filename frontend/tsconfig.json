@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,11 +18,10 @@
 
     "moduleResolution": "node",
 
-    //새로추가
-    "paths": {
-      "ckeditor5/translations/*": ["./node_modules/ckeditor5/dist/translations/*"]
-    },
 
+    //새로추가 2
+    "noImplicitAny": false, // 암시적 any 타입 허용
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,

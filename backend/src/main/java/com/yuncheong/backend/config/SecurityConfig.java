@@ -1,4 +1,5 @@
 package com.yuncheong.backend.config;
+
 import com.yuncheong.backend.security.JwtAuthenticationEntryPoint;
 import com.yuncheong.backend.security.JwtAuthenticationFilter;
 import com.yuncheong.backend.security.JwtTokenProvider;
@@ -32,6 +33,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // 비밀번호 인코딩을 위해 BCrypt 사용
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -42,24 +44,33 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**", config); // 기본 CORS 설정
+
+        // 추가: 이미지 업로드 API에 대한 CORS 허용
+        source.registerCorsConfiguration("/api/upload/image", config); // 이미지 업로드 URL 추가
         return source;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource( corsConfigurationSource())) // ✅ CORS 설정 적용
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ CORS 설정 적용
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/admin/login",
-                                "/api/admin/register","/api/admin/refresh"
+                                "/api/admin/register",
+                                "/api/admin/refresh",
+                                "/images/**",
+                                "/api/upload",
+                                "/uploads/**"
+                                // 이미지 업로드 API에 대한 인증 허용
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll() // 조회는 누구나
                         .requestMatchers(HttpMethod.POST, "/api/posts").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/posts/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/posts/**").authenticated()
+                        .requestMatchers("/api/upload").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(

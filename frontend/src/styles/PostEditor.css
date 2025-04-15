@@ -1,25 +1,214 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+.post-editor-container {
+    position: fixed; /* 전체 화면 고정 */
+    top: 60px; /* 헤더 높이만큼 내려줌 */
+    width: 100%;
+    height: calc(100vh - 120px);
 
-@media print {
-    body {
-        margin: 0 !important;
-    }
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
 }
 
-.post-editor-container {
-    font-family: 'Lato';
-    width: fit-content;
+/* 에디터 박스 (MenuBar + ProseMirror를 묶은 div) */
+.editor-box {
+    width: 100%;
+    max-width: 800px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 글쓰는곳 */
+.ProseMirror {
+    min-height: 400px;
+    padding: 1.5rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    background-color: white;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+/* 에디터 전체 래퍼 */
+.post-editor-wrapper {
+
+   max-width: 768px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
 }
 
-.ck-content {
-    font-family: 'Lato';
-    line-height: 1.6;
-    word-break: break-word;
+/* 에디터 내부 텍스트 영역 */
+.tiptap {
+    outline: none;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #1f2937; /* text-gray-800 */
 }
 
-.editor-container_classic-editor .editor-container__editor {
-    min-width: 795px;
-    max-width: 795px;
+.tiptap h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.tiptap h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.tiptap h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.tiptap ul, .tiptap ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.tiptap blockquote {
+    border-left: 4px solid #d1d5db;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #6b7280;
+    margin: 1.5rem 0;
+}
+
+.tiptap code {
+    background-color: #f3f4f6;
+    color: #ef4444;
+    font-size: 0.95rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+}
+
+.tiptap pre {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+/* 메뉴 바 버튼 스타일 */
+.control-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.button-group button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.button-group button:hover {
+    background-color: #e5e7eb;
+}
+
+.button-group button.is-active {
+    background-color: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+
+/* Bubble menu */
+.bubble-menu {
+    background-color: #ffffff; /* var(--white) */
+    border: 1px solid #e5e7eb; /* var(--gray-1) */
+    border-radius: 0.7rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); /* var(--shadow) */
+    display: flex;
+    padding: 0.2rem;
+}
+
+.bubble-menu button {
+    background-color: unset;
+    border: none; /* 테두리 없애기 */
+    outline: none; /* 클릭 시 생기는 테두리 없애기 */
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #333;
+    transition: background-color 0.2s;
+}
+
+.bubble-menu button:hover {
+    background-color: #d1d5db; /* var(--gray-3) */
+}
+
+.bubble-menu button.is-active {
+    background-color: #958DF1; /* var(--purple) */
+}
+
+.bubble-menu button.is-active:hover {
+    background-color: #7e75d6; /* var(--purple-contrast) */
+}
+
+/* Floating menu */
+.floating-menu {
+    background-color: #ffffff; /* var(--white) */
+    border: 1px solid #e5e7eb; /* var(--gray-1) */
+    border-radius: 0.7rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06); /* var(--shadow) */
+    display: flex;
+    padding: 0.2rem;
+}
+
+.floating-menu button {
+    background-color: unset;
+    border: none; /* 테두리 없애기 */
+    outline: none; /* 클릭 시 생기는 테두리 없애기 */
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #333;
+    transition: background-color 0.2s;
+}
+
+.floating-menu button:hover {
+    background-color: #f4f4f4;  /* --gray-3 -> #f4f4f4 (연한 회색) */
+}
+
+.floating-menu button.is-active {
+    background-color: #ffffff;  /* --white -> #ffffff (흰색) */
+    color: #7c4dff;  /* --purple -> #7c4dff (보라색) */
+}
+
+.floating-menu button.is-active:hover {
+    color: #9c68ff;  /* --purple-contrast -> #9c68ff (밝은 보라색) */
+}
+
+/*문단쪼개기 */
+.tiptap hr {
+    border: none;
+    border-top: 1px solid #e0e0e0; /* var(--gray-2) */
+    cursor: pointer;
+    margin: 2rem 0;
+}
+
+.tiptap hr.ProseMirror-selectednode {
+    border-top: 1px solid #7c4dff; /* var(--purple) */
 }

@@ -15,8 +15,8 @@ import PostEditor from "./components/PostEditor";
 import Posts from "./pages/Posts";
 import Resister from "./pages/Register";
 import Register from "./pages/Register";
-import PostForm from "./components/PostForm";
-import PostDetail from "./components/PostDetail";
+import Editor from "./components/PostEditor";
+
 
 
 
@@ -35,9 +35,7 @@ const App: React.FC = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/posts" element={<Posts/>} />
                     <Route path="/register" element={<Register />} /> {/* /register 경로 추가 */}
-                    <Route path="/posts/new" element={<PostForm />} />
-                    <Route path="/posts/:id" element={<PostDetail />} />
-                    <Route path="/posts/:id/edit" element={<PostForm />} />
+                    <Route path="/post/new" element={<Editor/>}/>
                 </Routes>
                 <Footer />
             </SidebarProvider>
