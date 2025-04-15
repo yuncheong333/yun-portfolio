@@ -1,11 +1,11 @@
 import React from 'react'
-import { Editor } from '@tiptap/react'
+import {Editor} from '@tiptap/react'
 
 interface MenuBarProps {
     editor: Editor
 }
 
-const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
+const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
     if (!editor) return null
 
     return (
@@ -24,8 +24,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
                     <button onClick={() => editor.chain().focus().toggleCode().run()}
                             className={editor.isActive('code') ? 'is-active' : ''}>코드
                     </button>
-                    <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>Clear marks</button>
-                    <button onClick={() => editor.chain().focus().clearNodes().run()}>Clear nodes</button>
+                    <button onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                            className={editor.isActive('codeBlock') ? 'is-active' : ''}>코드블럭
+                    </button>
+                    <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>Clear marks
+                    </button>
+                    <button onClick={() => editor.chain().focus().clearNodes().run()}>Clear nodes
+                    </button>
                     <button onClick={() => editor.chain().focus().setParagraph().run()}
                             className={editor.isActive('paragraph') ? 'is-active' : ''}>Paragraph
                     </button>
@@ -59,8 +64,10 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
                     <button onClick={() => editor.chain().focus().toggleBlockquote().run()}
                             className={editor.isActive('blockquote') ? 'is-active' : ''}>Blockquote
                     </button>
-                    <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>Horizontal rule</button>
-                    <button onClick={() => editor.chain().focus().setHardBreak().run()}>Hard break</button>
+                    <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>Horizontal rule
+                    </button>
+                    <button onClick={() => editor.chain().focus().setHardBreak().run()}>Hard break
+                    </button>
                     <button onClick={() => editor.chain().focus().undo().run()}
                             disabled={!editor.can().chain().focus().undo().run()}>Undo
                     </button>
@@ -70,8 +77,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ editor }) => {
                     <button onClick={() => editor.chain().focus().setColor('#958DF1').run()}
                             className={editor.isActive('textStyle', {color: '#958DF1'}) ? 'is-active' : ''}>Purple
                     </button>
-                    <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-                        Set horizontal rule
+                    <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>Set horizontal rule
                     </button>
                     <button onClick={() => {
                         const input = document.createElement("input")

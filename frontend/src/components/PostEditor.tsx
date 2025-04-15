@@ -8,11 +8,31 @@ import React from 'react'
 import MenuBar from '../components/MenuBar'
 import { Image } from '@tiptap/extension-image'
 
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { all, createLowlight } from 'lowlight'
+import html from 'highlight.js/lib/languages/xml'
+import css from 'highlight.js/lib/languages/css'
+import js from 'highlight.js/lib/languages/javascript'
+import ts from 'highlight.js/lib/languages/typescript'
+import java from 'highlight.js/lib/languages/java'
+
+const lowlight = createLowlight(all)
+lowlight.register('html', html)
+lowlight.register('css', css)
+lowlight.register('js', js)
+lowlight.register('ts', ts)
+lowlight.register('java', java)
+
 const extensions = [
     Color.configure({ types: [TextStyle.name, ListItem.name] }),
     TextStyle,
-    StarterKit,
+    StarterKit.configure({
+        codeBlock: false,
+    }),
     Image,
+    CodeBlockLowlight.configure({
+        lowlight,
+    }),
 ]
 
 const PostEditor = () => {
@@ -30,7 +50,7 @@ const PostEditor = () => {
 
             <div className="editor-area">
                 {/* BubbleMenu 추가 */}
-                <BubbleMenu editor={editor} tippyOptions={{ duration: 100, appendTo: "parent" }}>
+                <BubbleMenu editor={editor} tippyOptions={{duration: 100, appendTo: "parent"}}>
                     <div className="bubble-menu">
                         <button
                             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -73,7 +93,7 @@ const PostEditor = () => {
                             onClick={() => editor.chain().focus().toggleBulletList().run()}
                             className={editor.isActive('bulletList') ? 'is-active' : ''}
                         >
-                            Bullet list
+                            점 리스트
                         </button>
                         <button
                             onClick={() => editor.chain().focus().setHorizontalRule().run()}
