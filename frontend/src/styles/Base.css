@@ -1,0 +1,13 @@
+.base-container {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    height: calc(100vh - 120px);
+    display: flex; /* 자식 요소들을 flex로 배치 */
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: flex-start; /* 수직 방향에서 시작 부분에 배치 */
+    align-items: flex-start; /* 수평 방향에서 시작 부분에 배치 */
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+}

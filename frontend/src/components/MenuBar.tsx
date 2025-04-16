@@ -98,7 +98,14 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                                     const data = await res.json()
                                     const imageUrl = data.url // ex: /uploads/abc123.png
 
-                                    editor.chain().focus().setImage({src: imageUrl}).run()
+                                    editor.chain().focus().insertContent({
+                                        type: 'resizableImage',
+                                        attrs: {
+                                            src: imageUrl,
+                                            width: 'auto',
+                                            height: 'auto',
+                                        },
+                                    }).run()
                                 } catch (err) {
                                     console.error("이미지 업로드 실패:", err)
                                 }

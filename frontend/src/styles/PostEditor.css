@@ -265,3 +265,18 @@
 .tiptap hr.ProseMirror-selectednode {
     border-top: 1px solid #7c4dff; /* var(--purple) */
 }
+/*이미지 리사이즈 */
+.resizable-image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.resizable-image-wrapper span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #666;
+    cursor: se-resize;
+}
