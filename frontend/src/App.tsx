@@ -1,21 +1,19 @@
 import styles from './App.module.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import api from "./api";
+import api from "./api/auth";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { SidebarProvider } from "./components/SidebarContext";
 import Footer from "./components/Footer";
 import "./styles/App.css";
 import Main from "./pages/Main";
-import About from "./pages/About";
-import Login from "./pages/Login";
+import About from "./pages/About/About";
+import Login from "./pages/Login/Login";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import PostEditor from "./components/PostEditor";
 import PostList from './components/PostList';
-import Resister from "./pages/Register";
 import Register from "./pages/Register";
-import Editor from "./components/PostEditor";
 import PostDetail from "./components/PostDetail";
 
 
