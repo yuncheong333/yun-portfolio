@@ -1,6 +1,6 @@
 // extensions/ResizableImageComponent.tsx
 import React, { useRef, useState } from 'react'
-import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
+import { NodeViewWrapper, NodeViewContent} from '@tiptap/react'
 
 const ResizableImageComponent = ({ node, updateAttributes, selected, deleteNode, editor }) => {
     const { src, width, height } = node.attrs
