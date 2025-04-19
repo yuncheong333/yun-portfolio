@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "../styles/Main.css";
-import yuncheongImg from "../assets/yuncheong-black.png";
-import bgImage from "../assets/background1.webp";
+import "../../styles/Main.css";
+import yuncheongImg from "../../assets/yuncheong-black.png";
+import bgImage from "../../assets/background1.webp";
 
 const Main = () => {
     return (

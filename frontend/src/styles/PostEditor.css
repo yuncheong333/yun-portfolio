@@ -10,43 +10,101 @@
     z-index: 1;
 }
 
-/* 에디터 박스 (MenuBar + ProseMirror를 묶은 div) */
-.editor-box {
-    width: 100%;
-    max-width: 800px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 1.5rem;
+.first-container {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    gap: 10%;
+
+}
+
+.submit-container {
+
+    display: flex;
+    justify-content: right;
+    height: auto;
+    align-items: center;
+}
+
+.submit-button {
+    margin-right: 1rem;
+    width: 60px;      /* 너비 고정 */
+    height: 36px;     /* 높이 고정 */
+    background-color: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.title-input {
+    width: 90%;
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    border: none;
+
+    background-color: #f9fafb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
 }
 
 /* 글쓰는곳 */
 .ProseMirror {
-    min-height: 400px;
+    min-height: 30rem;
     padding: 1.5rem;
     border: 1px solid #e1e1e1;
-    border-radius: 10px;
     background-color: white;
     line-height: 1.6;
     font-size: 1rem;
 }
-/* 에디터 전체 래퍼 */
-.post-editor-wrapper {
 
-   max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #ffffff;
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e5e7eb;
+/* 메뉴바 */
+.post-editor-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+    padding: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+/* 메뉴 바 버튼 스타일 */
+.control-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-/* 에디터 내부 텍스트 영역 */
+.button-group button {
+
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+    border: none;
+    background-color: #f9fafb;
+    color: #374151;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.button-group button:hover {
+    background-color: #e5e7eb;
+    border-color: #cbd5e1;
+}
+
+.button-group button.is-active {
+    background-color: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+/* 메뉴바 내부 텍스트 영역 */
 .tiptap {
     outline: none;
     font-size: 1rem;
@@ -86,106 +144,138 @@
 }
 
 /* 코드하이라이트 */
-
 .tiptap pre {
-    background: #000000; /* var(--black) */
+    background: #1e1e1e;
     border-radius: 0.5rem;
-    color: #ffffff; /* var(--white) */
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #d4d4d4;
+    overflow-x: auto;
     font-family: 'JetBrainsMono', monospace;
-    margin: 1.5rem 0;
-    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
 }
 
+/* 기본 코드 스타일 */
 .tiptap pre code {
     background: none;
     color: inherit;
-    font-size: 0.8rem;
     padding: 0;
+    font-size: inherit;
+    line-height: 1.5;
 }
 
-/* Code styling */
+/* 주석, 인용 */
 .tiptap pre .hljs-comment,
 .tiptap pre .hljs-quote {
-    color: #616161;
+    color: #6a9955;
+    font-style: italic;
 }
 
+/* 키워드, 예약어 */
+.tiptap pre .hljs-keyword,
+.tiptap pre .hljs-selector-tag,
+.tiptap pre .hljs-doctag,
+.tiptap pre .hljs-formula {
+    color: #c586c0;
+    font-weight: bold;
+}
+
+/* 숫자, 리터럴, 내장 타입 */
+.tiptap pre .hljs-number,
+.tiptap pre .hljs-literal,
+.tiptap pre .hljs-symbol,
+.tiptap pre .hljs-bullet {
+    color: #b5cea8;
+}
+
+/* 문자열 */
+.tiptap pre .hljs-string {
+    color: #ce9178;
+}
+
+/* 속성, 태그, 클래스명 등 */
+.tiptap pre .hljs-attr,
 .tiptap pre .hljs-variable,
 .tiptap pre .hljs-template-variable,
-.tiptap pre .hljs-attribute,
 .tiptap pre .hljs-tag,
-.tiptap pre .hljs-regexp,
-.tiptap pre .hljs-link,
 .tiptap pre .hljs-name,
 .tiptap pre .hljs-selector-id,
 .tiptap pre .hljs-selector-class {
-    color: #f98181;
+    color: #dcdcaa;
 }
 
-.tiptap pre .hljs-number,
-.tiptap pre .hljs-meta,
-.tiptap pre .hljs-built_in,
-.tiptap pre .hljs-builtin-name,
-.tiptap pre .hljs-literal,
-.tiptap pre .hljs-type,
-.tiptap pre .hljs-params {
-    color: #fbbc88;
+/* 함수명 */
+.tiptap pre .hljs-title.function_ {
+    color: #dcdcaa;
 }
 
-.tiptap pre .hljs-string,
-.tiptap pre .hljs-symbol,
-.tiptap pre .hljs-bullet {
-    color: #b9f18d;
+/* 클래스 이름, 생성자 등 */
+.tiptap pre .hljs-title.class_,
+.tiptap pre .hljs-class .hljs-title {
+    color: #4ec9b0;
 }
 
-.tiptap pre .hljs-title,
-.tiptap pre .hljs-section {
-    color: #faf594;
+/* 메타 정보 */
+.tiptap pre .hljs-meta {
+    color: #9cdcfe;
 }
 
-.tiptap pre .hljs-keyword,
-.tiptap pre .hljs-selector-tag {
-    color: #70cff8;
+/* 강조 텍스트 */
+.tiptap pre .hljs-strong {
+    font-weight: bold;
+    color: #ff9e64;
 }
 
 .tiptap pre .hljs-emphasis {
     font-style: italic;
+    color: #c0caf5;
 }
 
-.tiptap pre .hljs-strong {
-    font-weight: 700;
+/* 링크 */
+.tiptap pre .hljs-link {
+    color: #4fc1ff;
+    text-decoration: underline;
 }
 
-/* 메뉴 바 버튼 스타일 */
-.control-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+/* 오류나 강조 표시 */
+.tiptap pre .hljs-error {
+    background-color: #ff000033;
+    color: #f44747;
+    font-weight: bold;
 }
 
-.button-group button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.875rem;
-    border-radius: 0.375rem;
-    border: 1px solid #d1d5db;
-    background-color: #f9fafb;
-    color: #374151;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+.tiptap pre .hljs-attr {
+    color: #dcdcaa; /* 노란색 계열 */
+    font-style: normal;
+    font-weight: 500;
 }
 
-.button-group button:hover {
-    background-color: #e5e7eb;
+/* JSX 태그명 */
+.tiptap pre .hljs-tag,
+.tiptap pre .hljs-name {
+    color: #569cd6; /* 파란 계열 */
+    font-weight: bold;
 }
 
-.button-group button.is-active {
-    background-color: #6366f1;
-    color: white;
-    border-color: #6366f1;
+/* JSX 속성 값 (문자열 등) */
+.tiptap pre .hljs-string {
+    color: #ce9178; /* 밝은 주황 */
 }
+
+/* =, {} 같은 기호 */
+.tiptap pre .hljs-punctuation {
+    color: #ffffff;
+}
+
+/* 함수나 메서드명 */
+.tiptap pre .hljs-title.function_ {
+    color: #dcdcaa;
+}
+
 
 
 /* Bubble menu */
+
 .bubble-menu {
     background-color: #ffffff; /* var(--white) */
     border: 1px solid #e5e7eb; /* var(--gray-1) */

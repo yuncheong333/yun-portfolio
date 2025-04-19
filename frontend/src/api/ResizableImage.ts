@@ -32,6 +32,11 @@ export const ResizableImage = Node.create({
         return [
             {
                 tag: 'img[src]',
+                getAttrs: dom => ({
+                    src: dom.getAttribute('src'),
+                    width: dom.getAttribute('width') || 'auto',
+                    height: dom.getAttribute('height') || 'auto',
+                }),
             },
         ]
     },

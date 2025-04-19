@@ -49,14 +49,11 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
         } catch (ExpiredJwtException ex) {
-            log.error("Token expired", ex);
-            throw new JwtAuthenticationException("토큰이 만료되었습니다");
-        } catch (MalformedJwtException ex) {
-            log.error("Invalid token", ex);
-            throw new JwtAuthenticationException("유효하지 않은 토큰입니다");
+            // 만료된 토큰도 정보 추출을 위해 true 반환
+            return true;
         } catch (Exception ex) {
             log.error("Token validation failed", ex);
-            throw new JwtAuthenticationException("토큰 검증에 실패했습니다");
+            return false;
         }
     }
 
@@ -67,6 +64,9 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token)
                     .getBody();
             return Long.parseLong(claims.getSubject());
+        } catch (ExpiredJwtException ex) {
+            // 만료된 토큰에서도 정보 추출
+            return Long.parseLong(ex.getClaims().getSubject());
         } catch (Exception ex) {
             log.error("Token parsing failed", ex);
             throw new JwtAuthenticationException("토큰에서 사용자 정보를 추출할 수 없습니다");

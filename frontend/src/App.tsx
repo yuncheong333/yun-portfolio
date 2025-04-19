@@ -7,14 +7,14 @@ import Sidebar from "./components/Sidebar";
 import { SidebarProvider } from "./components/SidebarContext";
 import Footer from "./components/Footer";
 import "./styles/App.css";
-import Main from "./pages/Main";
+import Main from "./pages/Main/Main";
 import About from "./pages/About/About";
 import Login from "./pages/Login/Login";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import PostEditor from "./components/PostEditor";
-import PostList from './components/PostList';
-import Register from "./pages/Register";
-import PostDetail from "./components/PostDetail";
+import PostEditor from "./pages/Post/components/PostEditor";
+import PostList from './pages/Post/PostList';
+import Register from "./pages/Login/Register";
+import PostDetail from "./pages/Post/components/PostDetail";
 
 
 

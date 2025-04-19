@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // useNavigate 추가
-import api from "../api/auth"; // api 경로는 자신의 경로에 맞게 수정
-import '../styles/Base.css';
+import api from "../../../api/auth"; // api 경로는 자신의 경로에 맞게 수정
+import '../../../styles/Base.css';
 
 const PostDetail = () => {
     const { id } = useParams(); // URL에서 id 파라미터를 추출
