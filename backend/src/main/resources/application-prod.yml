@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/yuncheong
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  file:
+    upload-dir: /uploads/
+
+logging:
+  level:
+    root: INFO
+    com.yuncheong.backend: INFO
+  file:
+    name: logs/application.log
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000
+  remember-me-expiration: 2592000000
+  refresh-expiration: 604800000

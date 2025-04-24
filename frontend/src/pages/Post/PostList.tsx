@@ -94,7 +94,7 @@ const PostList = () => {
             setPosts(prev => prev.filter(post => post.id !== selectedPost.id));
             setSelectedPost(null);
         } catch (err) {
-            setError("게시글 삭제에 실패했습니다.");
+            setError("게시글 삭제 실패");
         }
     };
 
