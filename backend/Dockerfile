@@ -7,4 +7,4 @@ COPY . .
 RUN chmod +x ./gradlew
 RUN ./gradlew bootJar
 
-CMD ["java", "-jar", "build/libs/backend.jar"]
+CMD ["java", "-jar", "build/libs/backend-0.0.1-SNAPSHOT.jar"]
