@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: yun-backend
+    env: docker
+    repo: https://github.com/yuncheong333/yun-portfolio
+    branch: prod
+    rootDir: backend
