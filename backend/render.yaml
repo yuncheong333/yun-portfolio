@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: springboot-backend
+    runtime: java
+    javaVersion: 17  # Java 버전 명시
+    buildCommand: ./gradlew bootJar
+    startCommand: java -jar build/libs/*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://localhost:3306/yuncheong
+      - key: SPRING_DATASOURCE_USERNAME
+        value: root
+      - key: SPRING_DATASOURCE_USERNAME
+        value: 1234
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: UPLOAD_DIR
+        value: uploads/
+      - key: JWT_SECRET
+        value: bXlTdXBlclNlY3VyZUtleUZvckhTNTEyQWxnb3JpdGhtV2l0aFN1ZmZpY2llbnRCaXRzTGVuZ3RoMTIzNDU2Nzg5MA==
