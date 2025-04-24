@@ -1,283 +1,184 @@
-@media (min-width: 1025px) {
-
-
-    .post-layout {
-        height: calc(100vh - 120px); /* 헤더 높이를 빼고 나머지 공간 사용 */
-        display: flex;
-        margin-top: 60px; /* 헤더 높이만큼 공간 확보 */
-    }
-
-    .post-list-panel {
-        flex: 1;
-        padding: 2rem;
-        background: #f9f9f9;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        position: relative;
-    }
-
-    .post-lists {
-        overflow: auto;
-
-        height: 30rem;
-    }
-
-    .post-list-panel.collapsed {
-        flex: 0.2;
-        background-color: #f0f0ff;
-    }
-
-    .post-detail-panel {
-        position: relative;
-        flex: 1;
-        border-radius: 8px;
-        padding: 2rem;
-        overflow-y: auto;
-        background: white;
-        border-left: 1px solid #ddd;
-    }
-
-    .post-title-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between; /* 양 끝 정렬 */
-        align-items: center; /* 수직 가운데 정렬 */
-        border-bottom: 3px solid #cccccc;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .post-createAt-container {
-        display: flex;
-        align-items: flex-end;
-        font-size: 0.8rem;
-        color: #666;
-    }
-
-    .post-createAt-container h4 {
-
-        margin-bottom: auto;
-        bottom: 1px;
-    }
-
-    .post-createAt-container {
-        justify-content: center; /* 가로 가운데 */
-        align-items: center;
-        right: 1rem;
-    }
-
-    .post-content-container {
-        margin-top: 5rem;
-    }
-
-    /*페이징 */
-    .pagination-container {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 1rem;
-    }
-
-    .page-btn {
-        padding: 0.5rem 1rem;
-        border: 1px solid #ccc;
-        background: white;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-
-    .page-btn.active {
-        background-color: #4f46e5;
-        color: white;
-        border-color: #4f46e5;
-    }
-
-    /* 수정버튼 */
-    .post-actions {
-        position: absolute;
-        top: 1rem;
-        right: 2rem;
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .post-actions button {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-        background-color: #6366f1;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background 0.2s ease;
-    }
-
-    .post-actions button:hover {
-        background-color: #555;
-    }
-
-    /*새 글 버튼 */
-    .new-button {
-        position: absolute;
-        bottom: 2rem;
-        right: 2rem;
-        width: 3.5rem;
-        height: 3.5rem;
-        background-color: #4f46e5;
-        color: white;
-        font-size: 1.5rem;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease;
-    }
-
-    .new-button:hover {
-        background-color: #4338ca;
-    }
+.post-layout {
+    height: calc(100vh - 120px); /* 헤더 높이를 빼고 나머지 공간 사용 */
+    display: flex;
+    margin-top: 60px; /* 헤더 높이만큼 공간 확보 */
 }
 
-/* 📱 모바일 대응 (가로 너비 768px 이하) */
-@media (max-width: 1024px) {
+.post-list-panel {
+    flex: 1;
+    padding: 2rem;
+    background: #f9f9f9;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
 
-    .post-layout {
-        height: calc(100vh - 120px); /* 헤더 높이를 빼고 나머지 공간 사용 */
-        display: flex;
-        margin-top: 60px; /* 헤더 높이만큼 공간 확보 */
-    }
+.post-lists li h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
 
-    .post-list-panel {
-        flex: 1;
-        padding: 2rem;
-        background: #f9f9f9;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        position: relative;
-    }
+.post-item.active {
 
-    .post-lists {
-        overflow: auto;
 
-        height: 30rem;
-    }
+    color: #9c68ff; /* 인디고 */
+}
 
-    .post-list-panel.collapsed {
-        flex: 0.2;
-        background-color: #f0f0ff;
-    }
+.post-lists {
 
-    .post-detail-panel {
-        position: relative;
-        flex: 1;
-        border-radius: 8px;
-        padding: 2rem;
-        overflow-y: auto;
-        background: white;
-        border-left: 1px solid #ddd;
-    }
+    overflow: auto;
+    height: 30rem;
+}
 
-    .post-title-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between; /* 양 끝 정렬 */
-        align-items: center; /* 수직 가운데 정렬 */
-        border-bottom: 3px solid #cccccc;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-    }
+.post-list-h h2 {
+    padding-left: 2rem;
+}
 
-    .post-createAt-container {
-        display: flex;
-        align-items: flex-end;
-        font-size: 0.8rem;
-        color: #666;
-    }
+ul.list-none {
+    padding-left: 4rem;
+    list-style: none;
 
-    .post-createAt-container h4 {
+    margin: 0;
+}
 
-        margin-bottom: auto;
-        bottom: 1px;
-    }
+.post-list-panel.collapsed h2 {
+    padding: 0;
+    transition: 0.4s;
+}
 
-    .post-createAt-container {
-        justify-content: center; /* 가로 가운데 */
-        align-items: center;
-        right: 1rem;
-    }
+.post-list-panel.collapsed ul.list-none {
+    padding: 0;
+    transition: 0.4s;
+}
 
-    .post-content-container {
-        margin-top: 5rem;
-    }
+.post-list-panel.collapsed {
+    padding: 2rem;
+    flex: 0.2;
+    background-color: #f0f0ff;
+}
 
-    /*페이징 */
-    .pagination-container {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 1rem;
-    }
+.post-detail-panel {
+    position: relative;
+    flex: 1;
+    border-radius: 8px;
+    padding: 2rem;
+    overflow-y: auto;
+    background: white;
+    border-left: 1px solid #ddd;
+}
 
-    .page-btn {
-        padding: 0.5rem 1rem;
-        border: 1px solid #ccc;
-        background: white;
-        cursor: pointer;
-        border-radius: 4px;
-    }
+.post-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* 양 끝 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    border-bottom: 3px solid #cccccc;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
 
-    .page-btn.active {
-        background-color: #4f46e5;
-        color: white;
-        border-color: #4f46e5;
-    }
+.post-createAt-container {
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.8rem;
+    color: #666;
+}
 
-    /* 수정버튼 */
-    .post-actions {
-        position: absolute;
-        top: 1rem;
-        right: 2rem;
-        display: flex;
-        gap: 0.5rem;
-    }
+.post-createAt-container h4 {
 
-    .post-actions button {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-        background-color: #6366f1;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background 0.2s ease;
-    }
+    margin-bottom: auto;
+    bottom: 1px;
+}
 
-    .post-actions button:hover {
-        background-color: #555;
-    }
+.post-createAt-container {
+    justify-content: center; /* 가로 가운데 */
+    align-items: center;
+    right: 1rem;
+}
 
-    /*새 글 버튼 */
-    .new-button {
-        position: absolute;
-        bottom: 2rem;
-        right: 2rem;
-        width: 3.5rem;
-        height: 3.5rem;
-        background-color: #4f46e5;
-        color: white;
-        font-size: 1.5rem;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease;
-    }
+.post-content-container {
+    margin-top: 5rem;
+}
 
-    .new-button:hover {
-        background-color: #4338ca;
-    }
+/*페이징 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.page-btn.active {
+    background-color: #4f46e5;
+    color: white;
+    border-color: #4f46e5;
+}
+
+/* 수정버튼 */
+.post-actions {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.post-actions button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    background-color: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.post-actions button:hover {
+    background-color: #555;
+}
+
+/*새 글 버튼 */
+.new-button {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: #4f46e5;
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.new-button:hover {
+    background-color: #4338ca;
+}
+
+button.disabled-btn {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    border: none;
+    opacity: 0.7;
+}
+
+button.disabled-btn:hover {
+    background-color: #ccc;
 }

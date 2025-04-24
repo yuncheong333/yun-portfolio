@@ -24,7 +24,8 @@ const PostSubmit = ({ editor, title, postId }: { editor: any, title: string, pos
                 navigate(`/posts?id=${res.data.id}`)
             }
         } catch (err) {
-            alert("저장에 실패했습니다.")
+            alert("관리자 기능입니다. 로그인 필요");
+            window.location.href = "/login";
         }
     }
 

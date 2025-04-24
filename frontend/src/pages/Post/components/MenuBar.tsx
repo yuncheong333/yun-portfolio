@@ -14,6 +14,7 @@ import {
     Code2, Undo2, Redo2,
     TextQuote, Heading4,
 } from 'lucide-react'
+import api from "../../../api/auth";
 
 
 interface MenuBarProps {
@@ -98,13 +99,14 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                                 formData.append("file", file)
 
                                 try {
-                                    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
-                                        method: "POST",
-                                        body: formData,
+                                    const res = await api.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
+                                        headers: {
+                                            'Content-Type': 'multipart/form-data',
+                                        },
                                     })
 
-                                    const data = await res.json()
-                                    const imageUrl = `${process.env.REACT_APP_API_URL}${data.url}`
+
+                                    const imageUrl = `${process.env.REACT_APP_API_URL}${res.data.url}`
 
                                     editor.chain().focus().insertContent({
                                         type: 'resizableImage',

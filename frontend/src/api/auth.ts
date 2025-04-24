@@ -17,41 +17,34 @@ api.interceptors.request.use(config => {
     }
     return config;
 });
+
 api.interceptors.response.use(
     response => response,
     async error => {
         const originalRequest = error.config;
 
-        // 커스텀 440 에러 또는 401 에러 처리
-        if ((error.response?.status === 440 || error.response?.status === 401)
-            && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
 
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
                 const response = await refreshInstance.post('/admin/refresh', {
-                    refreshToken
+                    refreshToken,
                 });
 
-                // 새 토큰 저장
-                localStorage.setItem('accessToken', response.data.accessToken);
-                localStorage.setItem('refreshToken', response.data.refreshToken);
+                const newAccessToken = response.data.accessToken;
+                localStorage.setItem('accessToken', newAccessToken);
 
-                // Axios 기본 헤더 업데이트
-                api.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+                // 새로운 access token으로 재요청
+                originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-                // 원래 요청의 헤더 업데이트
-                originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
-
-                return api(originalRequest);
+                return api(originalRequest); // 실패했던 요청 재시도
             } catch (refreshError) {
-                // 리프레시 실패 시 로그아웃 처리
-                localStorage.removeItem('accessToken');
-                localStorage.removeItem('refreshToken');
-                window.location.href = '/login';
+                console.error('리프레시 실패', refreshError);
                 return Promise.reject(refreshError);
             }
         }
+
         return Promise.reject(error);
     }
 );

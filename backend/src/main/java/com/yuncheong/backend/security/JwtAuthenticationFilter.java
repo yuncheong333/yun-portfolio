@@ -26,8 +26,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        // 인증이 필요 없는 경로는 필터 건너뜀
-        if ("/api/admin/refresh".equals(request.getRequestURI())) {
+
+        String path = request.getServletPath();
+
+
+        if (request.getMethod().equals("GET")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+
+        if (path.equals("/api/admin/login") || path.equals("/api/admin/refresh")) {
             filterChain.doFilter(request, response);
             return;
         }
