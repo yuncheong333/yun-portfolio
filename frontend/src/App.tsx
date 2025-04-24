@@ -14,8 +14,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import PostEditor from "./pages/Post/components/PostEditor";
 import PostList from './pages/Post/PostList';
 import Register from "./pages/Login/Register";
-import PostDetail from "./pages/Post/components/PostDetail";
-
 
 
 
@@ -35,7 +33,6 @@ const App: React.FC = () => {
                     <Route path="/posts" element={<PostList />} />
                     <Route path="/register" element={<Register />} /> {/* /register 경로 추가 */}
                     <Route path="/posts/new" element={<PostEditor/>}/>
-                    <Route path="/posts/:id" element={<PostDetail />} />
                     <Route path="/posts/:id/edit" element={<PostEditor />} />
                 </Routes>
                 <Footer />

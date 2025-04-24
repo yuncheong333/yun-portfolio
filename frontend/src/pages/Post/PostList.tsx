@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../api/auth";
-import '../../styles/Base.css'
-import '../../styles/Postlist.css'
-import hljs from 'highlight.js'
+import '../../styles/Base.css';
+import '../../styles/Postlist.css';
+import hljs from 'highlight.js';
 import 'highlight.js/styles/github-dark.css';
 import { useSearchParams } from "react-router-dom";
 
@@ -30,7 +30,7 @@ const PostList = () => {
     const [searchParams] = useSearchParams();
     const postIdFromQuery = searchParams.get("id");
 
-    //페이징
+    // 페이징
     const [currentPage, setCurrentPage] = useState<number>(1);
     const postsPerPage: number = 10;
     const indexOfLastPost = currentPage * postsPerPage;
@@ -38,11 +38,12 @@ const PostList = () => {
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     const totalPages: number = Math.ceil(posts.length / postsPerPage);
 
-    //페이징 함수
+    // 페이징 함수
     const handlePageClick = (page: number) => {
         setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: "smooth" }); // 선택사항: 페이지 위로 스크롤
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
     const renderPagination = (): React.ReactNode => {
         const pages: React.ReactNode[] = [];
 
@@ -61,14 +62,12 @@ const PostList = () => {
         return <div className="pagination-container">{pages}</div>;
     };
 
-
     useEffect(() => {
         const fetchPostSummaries = async () => {
             try {
                 const response = await api.get("/posts");
                 setPosts(response.data);
 
-                // 👇 쿼리스트링에 id가 있으면 자동으로 선택
                 if (postIdFromQuery) {
                     const detailRes = await api.get(`/posts/${postIdFromQuery}`);
                     setSelectedPost(detailRes.data);
@@ -103,19 +102,22 @@ const PostList = () => {
         if (!selectedPost) return;
         navigate(`/posts/${selectedPost.id}/edit`);
     };
+
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
-        const year = date.getFullYear(); // YYYY
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // MM
-        const day = date.getDate().toString().padStart(2, '0'); // DD
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
         return `${year}.${month}.${day}`;
     };
-    // ✅ 하이라이팅 적용: 게시글이 바뀌면 하이라이트 적용
+
     useEffect(() => {
         if (selectedPost) {
             hljs.highlightAll();
         }
     }, [selectedPost]);
+
+    const isAuthenticated = localStorage.getItem("accessToken") !== null;
 
     if (loading) return <p>로딩 중...</p>;
     if (error) return <p>{error}</p>;
@@ -123,15 +125,19 @@ const PostList = () => {
     return (
         <div className="post-layout">
             <div className={`post-list-panel ${selectedPost ? "collapsed" : ""}`}>
-                <div><h2>게시글 목록</h2></div>
+                <div className="post-list-h"><h2>게시글 목록</h2></div>
                 <div className="post-lists">
-                <ul>
-                    {currentPosts.map(post => (
-                        <li key={post.id} onClick={() => handlePostClick(post.id)}>
-                            <h3>{post.title}</h3>
-                        </li>
-                    ))}
-                </ul>
+                    <ul className="list-none">
+                        {currentPosts.map(post => (
+                            <li
+                                key={post.id}
+                                onClick={() => handlePostClick(post.id)}
+                                className={`post-item ${selectedPost?.id === post.id ? 'active' : ''}`}
+                            >
+                                <h3 className="post-title">{post.title}</h3>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 {renderPagination()}
                 <Link to="/posts/new">
@@ -142,8 +148,8 @@ const PostList = () => {
             {selectedPost && (
                 <div className="post-detail-panel">
                     <div className="post-actions">
-                        <button onClick={handleEdit}>수정</button>
-                        <button onClick={handleDelete}>삭제</button>
+                        <button onClick={handleEdit} disabled={!isAuthenticated} className={!isAuthenticated ? "disabled-btn" : ""}>수정</button>
+                        <button onClick={handleDelete} disabled={!isAuthenticated} className={!isAuthenticated ? "disabled-btn" : ""}>삭제</button>
                     </div>
                     <div className="post-title-container">
                         <h1>{selectedPost.title}</h1>
@@ -151,8 +157,7 @@ const PostList = () => {
                             <h4>작성일 : {formatDate(selectedPost.createdAt)}</h4>
                         </div>
                     </div>
-                    <div className="post-content-container" dangerouslySetInnerHTML={{__html: selectedPost.content}}/>
-
+                    <div className="post-content-container" dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
                 </div>
             )}
         </div>
