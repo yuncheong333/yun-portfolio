@@ -1,9 +1,11 @@
 services:
   - type: web
     name: springboot-backend
-    runtime: java
-    javaVersion: 17  # Java 버전 명시
-    buildCommand: ./gradlew bootJar
+    runtime: java  # ★ 핵심: 반드시 java로 명시
+    javaVersion: 17
+    buildCommand: >-
+      export JAVA_HOME=/usr/lib/jvm/java-17-openjdk &&
+      ./gradlew bootJar -Dorg.gradle.java.home=$JAVA_HOME
     startCommand: java -jar build/libs/*.jar
     envVars:
       - key: SPRING_DATASOURCE_URL
