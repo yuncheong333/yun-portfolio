@@ -2,6 +2,7 @@ package com.yuncheong.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -39,6 +40,7 @@ public class AdminEntity {
     public void changePassword(String encryptedPassword) {
         this.password = encryptedPassword;
     }
+
     @Column(name = "refresh_token", length = 1000)
     private String refreshToken;
 

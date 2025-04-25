@@ -1,4 +1,3 @@
-// PostDTO.java
 package com.yuncheong.backend.dto;
 
 import lombok.*;
