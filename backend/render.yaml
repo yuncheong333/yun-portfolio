@@ -6,7 +6,9 @@ services:
     branch: prod
     rootDir: backend
     envVars:
-      DB_HOST: your-db-host.render.com
-      DB_USERNAME: root
-      DB_PASSWORD: 1234
+      SPRING_PROFILES_ACTIVE : prod
+      PORT: 8080
+      DB_HOST: db.cityuxxvfbfznctyhrkp.supabase.co
+      DB_USERNAME: postgres
+      DB_PASSWORD: qrwe1423qrwe
       JWT_SECRET: bXlTdXBlclNlY3VyZUtleUZvckhTNTEyQWxnb3JpdGhtV2l0aFN1ZmZpY2llbnRCaXRzTGVuZ3RoMTIzNDU2Nzg5MA==
