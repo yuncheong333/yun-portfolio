@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://db.cityuxxvfbfznctyhrkp.supabase.co:5432/postgres?sslmode=require
-    username: postgres
-    password: qrwe1423qrwe
+    url: jdbc:postgresql://aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres
+    user : postgres.bqrxfpgbmxojkdcrdiil
+    password : qrwe1423
     driver-class-name: org.postgresql.Driver
 
   servlet:

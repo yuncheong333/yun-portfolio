@@ -3,12 +3,11 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:5432/postgres?sslmode=require
-    username: ${DB_USERNAME}
+
+    url: jdbc:postgresql://${DB_URL}:6543/postgres
+    user: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
-
 
   servlet:
     multipart:
