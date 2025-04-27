@@ -37,7 +37,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://your-vercel-app.vercel.app"));
+        config.setAllowedOrigins(List.of("https://yuncheong-portfolio.vercel.app"));
 
         config.setAllowedMethods(List.of("*"));
         config.setAllowedHeaders(List.of("*"));
