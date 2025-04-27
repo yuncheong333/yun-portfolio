@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres?user=postgres.bqrxfpgbmxojkdcrdiil
-    password : qrwe1423
+    url: jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?user=postgres.cityuxxvfbfznctyhrkp
+    password : qrwe1423qrwe
     driver-class-name: org.postgresql.Driver
 
   servlet:
