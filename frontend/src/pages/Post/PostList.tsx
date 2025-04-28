@@ -122,6 +122,8 @@ const PostList = () => {
     // ⭐⭐ 여기 수정
     if (loadingMessage) return (
         <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <p> </p>
+            <p> </p>
             <h2>{loadingMessage}</h2>
             <p>잠시만 기다려주세요!</p>
         </div>
