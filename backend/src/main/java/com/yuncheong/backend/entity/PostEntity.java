@@ -21,13 +21,13 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false) // ← PostgreSQL용 TEXT
     private String content;
 
-    @Column(nullable = false)
+    @Column
     private String author;
 
     @CreatedDate
