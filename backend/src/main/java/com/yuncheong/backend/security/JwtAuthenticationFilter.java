@@ -26,10 +26,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-
+        String uri2 = request.getRequestURI();
         String path = request.getServletPath();
 
-
+        if ("/health".equals(uri2)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (request.getMethod().equals("GET")) {
             filterChain.doFilter(request, response);
             return;
