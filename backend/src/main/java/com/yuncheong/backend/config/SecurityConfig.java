@@ -64,7 +64,8 @@ public class SecurityConfig {
                                 "/api/admin/refresh",
                                 "/images/**",
                                 "/api/upload",
-                                "/uploads/**"
+                                "/uploads/**",
+                                "/health"
                                 // 이미지 업로드 API에 대한 인증 허용
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll() // 조회는 누구나
@@ -72,7 +73,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/posts/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/posts/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/upload").authenticated()
-                        .requestMatchers("/health").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
