@@ -11,6 +11,9 @@ spring:
       minimum-idle: 2
       validation-timeout: 3000
       idle-timeout: 60000
+      max-lifetime: 1800000
+      keepalive-time: 300000
+      leak-detection-threshold: 30000
   servlet:
     multipart:
      max-file-size: 30MB
