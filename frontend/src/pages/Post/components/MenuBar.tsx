@@ -104,9 +104,11 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                                 console.log("Form data:", formData);
 
                                 try {
+                                    const token = localStorage.getItem('accessToken');
                                     const res = await api.post("https://api.cloudinary.com/v1_1/doptvzhhe/image/upload", formData, {
                                         headers: {
                                             'Content-Type': 'multipart/form-data',
+                                            'Authorization': token ? `Bearer ${token}` : '',
                                         },
                                     });
 
