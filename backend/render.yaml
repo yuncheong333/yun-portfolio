@@ -9,4 +9,5 @@ services:
       SPRING_PROFILES_ACTIVE : prod
       PORT: 8080
       DB_PASSWORD: qrwe1423qrwe
+      IMG_SECRET: seyAGPWCTVQIWrVm1LYklmrUHoQ
       JWT_SECRET: bXlTdXBlclNlY3VyZUtleUZvckhTNTEyQWxnb3JpdGhtV2l0aFN1ZmZpY2llbnRCaXRzTGVuZ3RoMTIzNDU2Nzg5MA==

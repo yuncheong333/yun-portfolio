@@ -34,6 +34,11 @@ logging:
   file:
     name: logs/application.log
 
+cloudinary:
+  cloud-name: Untitled
+  api-key: 315635887927954
+  api-secret: seyAGPWCTVQIWrVm1LYklmrUHoQ
+
 jwt:
   secret: bXlTdXBlclNlY3VyZUtleUZvckhTNTEyQWxnb3JpdGhtV2l0aFN1ZmZpY2llbnRCaXRzTGVuZ3RoMTIzNDU2Nzg5MA==
   expiration: 86400000  # 24시간 (ms)
