@@ -93,24 +93,21 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                         input.type = "file"
                         input.accept = "image/*"
                         input.onchange = async () => {
-                            const file = input.files?.[0];
+                            const file = input.files?.[0]
                             if (file) {
-                                const formData = new FormData();
-                                formData.append("file", file);
-                                formData.append("upload_preset", "yun_port"); // 확인: 정확한 upload_preset 이름 사용
-
-                                // 디버깅용 로그 추가
+                                const formData = new FormData()
+                                formData.append("file", file)
+                                formData.append("upload_preset", "yun_port")
                                 console.log("File being uploaded:", file);
                                 console.log("Form data:", formData);
-
                                 try {
-                                    const token = localStorage.getItem('accessToken');
-                                    const res = await api.post("/upload-image", formData, {
+                                    const res = await api.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
                                         headers: {
                                             'Content-Type': 'multipart/form-data',
-                                            'Authorization': token ? `Bearer ${token}` : '',
                                         },
-                                    });
+                                    })
+
+
                                     const imageUrl = res.data.secure_url;
 
                                     editor.chain().focus().insertContent({
@@ -120,14 +117,12 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                                             width: 'auto',
                                             height: 'auto',
                                         },
-                                    }).run();
+                                    }).run()
                                 } catch (err) {
-                                    console.error("이미지 업로드 실패:", err);
-
+                                    console.error("이미지 업로드 실패:", err)
                                 }
                             }
                         }
-
                         input.click()
                     }} title="이미지 추가">
                         <ImagePlus size={18}/>

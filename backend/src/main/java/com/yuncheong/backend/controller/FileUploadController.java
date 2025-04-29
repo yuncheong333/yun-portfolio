@@ -35,27 +35,6 @@ public class FileUploadController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @PostMapping("/upload-image")
-    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", new ByteArrayResource(file.getBytes()) {
-            @Override
-            public String getFilename() {
-                return file.getOriginalFilename();
-            }
-        });
-        body.add("upload_preset", "yun_port");
-
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
-        RestTemplate restTemplate = new RestTemplate();
-        String cloudinaryUrl = "https://api.cloudinary.com/v1_1/doptvzhhe/image/upload";
-        ResponseEntity<Map> response = restTemplate.postForEntity(cloudinaryUrl, requestEntity, Map.class);
-
-        return ResponseEntity.ok(response.getBody());
-    }
 
 }
