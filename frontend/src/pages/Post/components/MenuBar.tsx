@@ -105,13 +105,12 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
 
                                 try {
                                     const token = localStorage.getItem('accessToken');
-                                    const res = await api.post("https://api.cloudinary.com/v1_1/doptvzhhe/image/upload", formData, {
+                                    const res = await api.post("/upload-image", formData, {
                                         headers: {
                                             'Content-Type': 'multipart/form-data',
                                             'Authorization': token ? `Bearer ${token}` : '',
                                         },
                                     });
-
                                     const imageUrl = res.data.secure_url;
 
                                     editor.chain().focus().insertContent({
