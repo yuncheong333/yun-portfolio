@@ -33,7 +33,7 @@ logging:
     name: logs/application.log
 
 cloudinary:
-  cloud-name: Untitled
+  cloud-name: doptvzhhe
   api-key: 315635887927954
   api-secret: ${IMG_SECRET}
 
