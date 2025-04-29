@@ -97,16 +97,17 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                             if (file) {
                                 const formData = new FormData()
                                 formData.append("file", file)
+                                formData.append("upload_preset", "yun-port")
 
                                 try {
-                                    const res = await api.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
+                                    const res = await api.post('https://api.cloudinary.com/v1_1/Untitled/image/upload', formData, {
                                         headers: {
                                             'Content-Type': 'multipart/form-data',
                                         },
                                     })
 
 
-                                    const imageUrl = `${process.env.REACT_APP_API_URL}${res.data.url}`
+                                    const imageUrl = res.data.secure_url;
 
                                     editor.chain().focus().insertContent({
                                         type: 'resizableImage',
