@@ -25,9 +25,6 @@ spring:
     show-sql: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-  file:
-    upload-dir: /uploads/
-
 logging:
   level:
     root: INFO
