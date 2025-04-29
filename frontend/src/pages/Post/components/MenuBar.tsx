@@ -97,10 +97,9 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                             if (file) {
                                 const formData = new FormData()
                                 formData.append("file", file)
-                                formData.append("upload_preset", "yun-port")
-
+                                formData.append("upload_preset", "yun_port")
                                 try {
-                                    const res = await api.post('https://api.cloudinary.com/v1_1/Untitled/image/upload', formData, {
+                                    const res = await api.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
                                         headers: {
                                             'Content-Type': 'multipart/form-data',
                                         },
