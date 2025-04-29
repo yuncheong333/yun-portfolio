@@ -17,7 +17,8 @@ const Login: React.FC = () => {
                 email,
                 password,
                 rememberMe,
-            });
+            },
+            { withCredentials: true});
 
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("adminId", response.data.adminId);
