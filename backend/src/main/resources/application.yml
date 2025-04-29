@@ -9,7 +9,6 @@ spring:
     hikari:
       maximum-pool-size: 5
       minimum-idle: 2
-      connection-test-query: SELECT 1
       validation-timeout: 3000
       idle-timeout: 60000
   servlet:
