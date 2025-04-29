@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/Login.css";
-import axios from "axios";
-
+import api from "../../api/auth";  // 수정된 api 인스턴스를 가져옵니다
 import InputField from "../Login/components/InputField";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const Login: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/login`, {
+            const response = await api.post("/admin/login", {
                 email,
                 password,
                 rememberMe,
