@@ -31,6 +31,7 @@ logging:
   file:
     name: logs/application.log
 
+
 cloudinary:
   cloud-name: doptvzhhe
   api-key: 315635887927954
