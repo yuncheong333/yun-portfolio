@@ -6,8 +6,8 @@ spring:
     url: jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?user=postgres.twqqxklolpmigoafpngz&password=qrwe1423qrwe
     driver-class-name: org.postgresql.Driver
     hikari:
-      maximum-pool-size: 5
-      minimum-idle: 2
+      maximum-pool-size: 10
+      minimum-idle: 3
       validation-timeout: 3000
       idle-timeout: 60000
       max-lifetime: 1800000
