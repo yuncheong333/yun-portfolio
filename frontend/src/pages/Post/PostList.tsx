@@ -119,7 +119,7 @@ const PostList = () => {
 
     const isAuthenticated = localStorage.getItem("accessToken") !== null;
 
-    // ⭐⭐ 여기 수정
+
     if (loadingMessage) return (
         <div style={{ textAlign: "center", marginTop: "80px" }}>
             <p> </p>

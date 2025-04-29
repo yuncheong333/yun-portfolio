@@ -6,7 +6,12 @@ spring:
     url: jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?user=postgres.cityuxxvfbfznctyhrkp
     password : qrwe1423qrwe
     driver-class-name: org.postgresql.Driver
-
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-test-query: SELECT 1
+      validation-timeout: 3000
+      idle-timeout: 60000
   servlet:
     multipart:
      max-file-size: 30MB
