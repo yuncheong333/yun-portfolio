@@ -64,7 +64,6 @@ public class SecurityConfig {
                                 "/api/admin/register",
                                 "/api/admin/refresh",
                                 "/images/**",
-                                "/api/upload",
                                 "/uploads/**",
                                 "/health"
                                 // 이미지 업로드 API에 대한 인증 허용
