@@ -89,76 +89,83 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                     <button onClick={() => editor.chain().focus().setHorizontalRule().run()} title="수평선">
                         <Minus size={18}/>
                     </button>
-                    <button onClick={() => {
-                        const input = document.createElement("input")
-                        input.type = "file"
-                        input.accept = "image/*"
-                        input.onchange = async () => {
-                            const file = input.files?.[0]
-                            if (file) {
-                                const formData = new FormData();
-                                formData.append("file", file);
-                                formData.append("upload_preset", "yun_port");
+                    <button
+                        onClick={() => {
+                            const input = document.createElement("input");
+                            input.type = "file";
+                            input.accept = "image/*";
 
-                                // 로그: 업로드할 파일 정보 출력
-                                console.log("[업로드 요청] 선택한 파일:", {
-                                    name: file.name,
-                                    type: file.type,
-                                    size: file.size,
-                                });
+                            input.onchange = async () => {
+                                const file = input.files?.[0];
 
-                                // 로그: FormData 항목 전체 확인
-                                for (const [key, value] of formData.entries()) {
-                                    console.log(`[FormData] ${key}:`, value);
-                                }
+                                if (file) {
+                                    const formData = new FormData();
+                                    formData.append("file", file);
+                                    formData.append("upload_preset", "yun_port");
 
-                                try {
-                                    const res = await api.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data',
-                                        },
+                                    // 🔍 디버깅용 로그
+                                    console.log("📁 선택한 파일:", {
+                                        name: file.name,
+                                        type: file.type,
+                                        size: `${file.size} bytes`,
                                     });
 
-                                    console.log("[응답 수신] 업로드 성공:", res.data);
-
-                                    const imageUrl = res.data.secure_url;
-                                    if (!imageUrl) {
-                                        console.warn("⚠️ 응답에는 secure_url이 포함되어 있지 않습니다:", res.data);
+                                    console.log("🧾 FormData 내용:");
+                                    for (const [key, value] of formData.entries()) {
+                                        if (value instanceof File) {
+                                            console.log(`- ${key}: File { name: ${value.name}, type: ${value.type}, size: ${value.size} bytes }`);
+                                        } else {
+                                            console.log(`- ${key}: ${value}`);
+                                        }
                                     }
 
-                                    editor.chain().focus().insertContent({
-                                        type: 'resizableImage',
-                                        attrs: {
-                                            src: imageUrl,
-                                            width: 'auto',
-                                            height: 'auto',
-                                        },
-                                    }).run();
+                                    try {
+                                        const res = await api.post(
+                                            `${process.env.REACT_APP_API_URL}/api/upload`,
+                                            formData,
+                                            {
+                                                headers: {
+                                                    "Content-Type": "multipart/form-data",
+                                                },
+                                            }
+                                        );
 
-                                    console.log("[에디터 삽입] 이미지가 성공적으로 에디터에 삽입되었습니다.");
+                                        const imageUrl = res.data.secure_url;
+                                        console.log("✅ 업로드 성공! 이미지 URL:", imageUrl);
 
-                                } catch (err: unknown) {
-                                    console.error("❌ 이미지 업로드 실패:");
-
-                                    if (axios.isAxiosError(err)) {
-                                        if (err.response) {
-                                            console.error("응답 상태코드:", err.response.status);
-                                            console.error("응답 본문:", err.response.data);
-                                        } else if (err.request) {
-                                            console.error("요청은 보냈지만 응답이 없습니다.", err.request);
+                                        editor.chain().focus().insertContent({
+                                            type: "resizableImage",
+                                            attrs: {
+                                                src: imageUrl,
+                                                width: "auto",
+                                                height: "auto",
+                                            },
+                                        }).run();
+                                    } catch (err: unknown) {
+                                        console.error("❌ 이미지 업로드 실패:");
+                                        if (axios.isAxiosError(err)) {
+                                            if (err.response) {
+                                                console.error("응답 상태 코드:", err.response.status);
+                                                console.error("응답 본문:", err.response.data);
+                                            } else if (err.request) {
+                                                console.error("요청 보냈지만 응답 없음:", err.request);
+                                            } else {
+                                                console.error("에러 메시지:", err.message);
+                                            }
                                         } else {
-                                            console.error("설정 중 에러 발생:", err.message);
+                                            console.error("Axios 외의 에러:", err);
                                         }
-                                    } else {
-                                        console.error("Axios 에러가 아닌 다른 예외:", err);
                                     }
                                 }
-                            }
+                            };
 
-                            input.click()
-                    }} title="이미지 추가">
+                            input.click();
+                        }}
+                        title="이미지 추가"
+                    >
                         <ImagePlus size={18}/>
                     </button>
+
                 </div>
             </div>
         </div>
