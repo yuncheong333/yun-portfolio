@@ -93,11 +93,15 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                         input.type = "file"
                         input.accept = "image/*"
                         input.onchange = async () => {
-                            const file = input.files?.[0]
+                            const file = input.files?.[0];
                             if (file) {
-                                const formData = new FormData()
-                                formData.append("file", file)
-                                formData.append("upload_preset", "yun_port")
+                                const formData = new FormData();
+                                formData.append("file", file);
+                                formData.append("upload_preset", "yun_port"); // 확인: 정확한 upload_preset 이름 사용
+
+                                // 디버깅용 로그 추가
+                                console.log("File being uploaded:", file);
+                                console.log("Form data:", formData);
 
                                 try {
                                     const res = await api.post("https://api.cloudinary.com/v1_1/doptvzhhe/image/upload", formData, {
@@ -115,12 +119,14 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                                             width: 'auto',
                                             height: 'auto',
                                         },
-                                    }).run()
+                                    }).run();
                                 } catch (err) {
-                                    console.error("이미지 업로드 실패:", err)
+                                    console.error("이미지 업로드 실패:", err);
+
                                 }
                             }
                         }
+
                         input.click()
                     }} title="이미지 추가">
                         <ImagePlus size={18}/>
