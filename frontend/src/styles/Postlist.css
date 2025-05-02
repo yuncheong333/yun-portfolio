@@ -187,7 +187,7 @@ button.disabled-btn:hover {
 blockquote {
     position: relative;
 
-    padding: 1.5rem 2rem;
+    padding: 1rem 1rem;
     background-color: #f9f9f9;
     border-left: 4px solid #6c63ff;
     font-style: italic;
