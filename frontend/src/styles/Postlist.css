@@ -186,12 +186,11 @@ button.disabled-btn:hover {
 /* 인용구 */
 blockquote {
     position: relative;
-
-
+    margin: 2rem auto;
     background-color: #f9f9f9;
     border-left: 4px solid #6c63ff;
     font-style: italic;
-    font-size: 1.1rem;
+
     color: #333;
     border-radius: 8px;
     max-width: 600px;
