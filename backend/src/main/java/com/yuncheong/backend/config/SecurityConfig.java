@@ -73,7 +73,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/posts/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/posts/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/upload").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/upload-image").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
