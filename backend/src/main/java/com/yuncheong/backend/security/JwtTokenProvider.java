@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-@Log4j2
 public class JwtTokenProvider {
 
     @Value("${jwt.secret}")
@@ -52,7 +51,6 @@ public class JwtTokenProvider {
             // 만료된 토큰도 정보 추출을 위해 true 반환
             return true;
         } catch (Exception ex) {
-            log.error("Token validation failed", ex);
             return false;
         }
     }
@@ -68,7 +66,6 @@ public class JwtTokenProvider {
             // 만료된 토큰에서도 정보 추출
             return Long.parseLong(ex.getClaims().getSubject());
         } catch (Exception ex) {
-            log.error("Token parsing failed", ex);
             throw new JwtAuthenticationException("토큰에서 사용자 정보를 추출할 수 없습니다");
         }
     }
