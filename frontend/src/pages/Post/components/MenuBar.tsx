@@ -15,6 +15,7 @@ import {
     TextQuote, Heading4,
 } from 'lucide-react'
 import api from "../../../api/auth";
+import axios from "axios";
 
 
 interface MenuBarProps {
@@ -88,43 +89,83 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
                     <button onClick={() => editor.chain().focus().setHorizontalRule().run()} title="수평선">
                         <Minus size={18}/>
                     </button>
-                    <button onClick={() => {
-                        const input = document.createElement("input")
-                        input.type = "file"
-                        input.accept = "image/*"
-                        input.onchange = async () => {
-                            const file = input.files?.[0]
-                            if (file) {
-                                const formData = new FormData()
-                                formData.append("file", file)
+                    <button
+                        onClick={() => {
+                            const input = document.createElement("input");
+                            input.type = "file";
+                            input.accept = "image/*";
 
-                                try {
-                                    const res = await api.post(`${process.env.REACT_APP_API_URL}/api/upload`, formData, {
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data',
-                                        },
-                                    })
+                            input.onchange = async () => {
+                                const file = input.files?.[0];
 
+                                if (file) {
+                                    const formData = new FormData();
+                                    formData.append("file", file);
+                                    formData.append("upload_preset", "yun_port");
 
-                                    const imageUrl = `${process.env.REACT_APP_API_URL}${res.data.url}`
+                                    // 🔍 디버깅용 로그
+                                    console.log("📁 선택한 파일:", {
+                                        name: file.name,
+                                        type: file.type,
+                                        size: `${file.size} bytes`,
+                                    });
 
-                                    editor.chain().focus().insertContent({
-                                        type: 'resizableImage',
-                                        attrs: {
-                                            src: imageUrl,
-                                            width: 'auto',
-                                            height: 'auto',
-                                        },
-                                    }).run()
-                                } catch (err) {
-                                    console.error("이미지 업로드 실패:", err)
+                                    console.log("🧾 FormData 내용:");
+                                    for (const [key, value] of formData.entries()) {
+                                        if (value instanceof File) {
+                                            console.log(`- ${key}: File { name: ${value.name}, type: ${value.type}, size: ${value.size} bytes }`);
+                                        } else {
+                                            console.log(`- ${key}: ${value}`);
+                                        }
+                                    }
+
+                                    try {
+                                        const res = await api.post(
+                                            `${process.env.REACT_APP_API_URL}/api/upload`,
+                                            formData,
+                                            {
+                                                headers: {
+                                                    "Content-Type": "multipart/form-data",
+                                                },
+                                            }
+                                        );
+
+                                        const imageUrl = res.data.secure_url;
+                                        console.log("✅ 업로드 성공! 이미지 URL:", imageUrl);
+
+                                        editor.chain().focus().insertContent({
+                                            type: "resizableImage",
+                                            attrs: {
+                                                src: imageUrl,
+                                                width: "auto",
+                                                height: "auto",
+                                            },
+                                        }).run();
+                                    } catch (err: unknown) {
+                                        console.error("❌ 이미지 업로드 실패:");
+                                        if (axios.isAxiosError(err)) {
+                                            if (err.response) {
+                                                console.error("응답 상태 코드:", err.response.status);
+                                                console.error("응답 본문:", err.response.data);
+                                            } else if (err.request) {
+                                                console.error("요청 보냈지만 응답 없음:", err.request);
+                                            } else {
+                                                console.error("에러 메시지:", err.message);
+                                            }
+                                        } else {
+                                            console.error("Axios 외의 에러:", err);
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                        input.click()
-                    }} title="이미지 추가">
+                            };
+
+                            input.click();
+                        }}
+                        title="이미지 추가"
+                    >
                         <ImagePlus size={18}/>
                     </button>
+
                 </div>
             </div>
         </div>

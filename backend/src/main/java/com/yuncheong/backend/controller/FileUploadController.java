@@ -1,39 +1,36 @@
 package com.yuncheong.backend.controller;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import com.yuncheong.backend.service.CloudinaryService;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+
 @RestController
 @RequestMapping("/api")
 public class FileUploadController {
 
-    @Value("${spring.file.upload-dir}")
-    private String uploadDir;
+    private final CloudinaryService cloudinaryService;
+
+    public FileUploadController(CloudinaryService cloudinaryService) {
+        this.cloudinaryService = cloudinaryService;
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            Path path = Paths.get(uploadDir).resolve(fileName);
-            Files.createDirectories(path.getParent());
-            Files.copy(file.getInputStream(), path);
+            // Cloudinary에 파일 업로드
+            String imageUrl = cloudinaryService.uploadImage(file);
 
-            // 이미지 접근 URL
-            String fileUrl = "/uploads/" + fileName;
-
-            Map<String, String> result = new HashMap<>();
-            result.put("url", fileUrl);
+            // 업로드된 이미지의 URL 반환
+            Map<String, String> result = Map.of("secure_url", imageUrl);
             return ResponseEntity.ok(result);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
 }

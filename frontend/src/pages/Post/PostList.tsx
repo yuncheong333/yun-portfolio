@@ -20,17 +20,17 @@ type PostDetail = {
     createdAt: string;
 };
 
+
 const PostList = () => {
     const { id } = useParams();
     const [posts, setPosts] = useState<PostSummary[]>([]);
     const [selectedPost, setSelectedPost] = useState<PostDetail | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loadingMessage, setLoadingMessage] = useState<string>("서버를 깨우는 중입니다...⏳");
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const postIdFromQuery = searchParams.get("id");
 
-    // 페이징
     const [currentPage, setCurrentPage] = useState<number>(1);
     const postsPerPage: number = 10;
     const indexOfLastPost = currentPage * postsPerPage;
@@ -38,7 +38,6 @@ const PostList = () => {
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     const totalPages: number = Math.ceil(posts.length / postsPerPage);
 
-    // 페이징 함수
     const handlePageClick = (page: number) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -46,7 +45,6 @@ const PostList = () => {
 
     const renderPagination = (): React.ReactNode => {
         const pages: React.ReactNode[] = [];
-
         for (let i = 1; i <= totalPages; i++) {
             pages.push(
                 <button
@@ -58,13 +56,14 @@ const PostList = () => {
                 </button>
             );
         }
-
         return <div className="pagination-container">{pages}</div>;
     };
 
     useEffect(() => {
         const fetchPostSummaries = async () => {
             try {
+                setLoadingMessage("서버를 깨우는 중입니다...⏳");
+
                 const response = await api.get("/posts");
                 setPosts(response.data);
 
@@ -72,10 +71,11 @@ const PostList = () => {
                     const detailRes = await api.get(`/posts/${postIdFromQuery}`);
                     setSelectedPost(detailRes.data);
                 }
+
+                setLoadingMessage(""); // 다 끝났으면 로딩 메시지 없애기
             } catch (err) {
                 setError("게시글 목록을 불러오는 데 실패했습니다.");
-            } finally {
-                setLoading(false);
+                setLoadingMessage("");
             }
         };
 
@@ -94,7 +94,7 @@ const PostList = () => {
             setPosts(prev => prev.filter(post => post.id !== selectedPost.id));
             setSelectedPost(null);
         } catch (err) {
-            setError("게시글 삭제에 실패했습니다.");
+            setError("게시글 삭제 실패");
         }
     };
 
@@ -119,8 +119,18 @@ const PostList = () => {
 
     const isAuthenticated = localStorage.getItem("accessToken") !== null;
 
-    if (loading) return <p>로딩 중...</p>;
+
+    if (loadingMessage) return (
+        <div style={{ textAlign: "center", marginTop: "80px" }}>
+            <p> </p>
+            <p> </p>
+            <h2>{loadingMessage}</h2>
+            <p>잠시만 기다려주세요!</p>
+        </div>
+    );
+
     if (error) return <p>{error}</p>;
+
 
     return (
         <div className="post-layout">

@@ -13,11 +13,12 @@ const Login: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8080/api/admin/login", {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/login`, {
                 email,
                 password,
                 rememberMe,
-            });
+            },
+            { withCredentials: true});
 
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("adminId", response.data.adminId);

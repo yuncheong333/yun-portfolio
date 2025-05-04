@@ -2,12 +2,12 @@ import axios from 'axios';
 
 // 요청을 보낼 기본 axios 인스턴스
 const api = axios.create({
-    baseURL: '/api',
+    baseURL: `${process.env.REACT_APP_API_URL}/api`,
 });
 
 // 리프레시 요청을 위한 별도의 axios 인스턴스
 const refreshInstance = axios.create({
-    baseURL: '/api',
+    baseURL: `${process.env.REACT_APP_API_URL}/api`,
 });
 
 api.interceptors.request.use(config => {

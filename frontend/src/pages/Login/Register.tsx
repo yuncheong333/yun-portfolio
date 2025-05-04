@@ -12,7 +12,7 @@ const Register = () => {
         const data = { email, password };
 
         try {
-            const response = await axios.post("http://localhost:8080/api/admin/register", data);
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin//register`, data);
             console.log(response.data);
             alert("회원가입 완료!");
         } catch (error) {

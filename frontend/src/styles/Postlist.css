@@ -182,3 +182,18 @@ button.disabled-btn {
 button.disabled-btn:hover {
     background-color: #ccc;
 }
+
+/* 인용구 */
+blockquote {
+    position: relative;
+
+    padding: 1rem 1rem;
+    background-color: #f9f9f9;
+    border-left: 4px solid #6c63ff;
+    font-style: italic;
+
+    color: #333;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}

@@ -2,10 +2,11 @@ package com.yuncheong.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "admins")
+@Table(name = "admin")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AdminEntity {
@@ -39,6 +40,7 @@ public class AdminEntity {
     public void changePassword(String encryptedPassword) {
         this.password = encryptedPassword;
     }
+
     @Column(name = "refresh_token", length = 1000)
     private String refreshToken;
 

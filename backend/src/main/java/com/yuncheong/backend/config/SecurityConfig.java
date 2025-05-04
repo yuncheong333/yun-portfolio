@@ -37,7 +37,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of("https://yuncheong-portfolio.vercel.app","http://localhost:3000"));
+
         config.setAllowedMethods(List.of("*"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("Authorization"));
@@ -57,13 +58,14 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ CORS 설정 적용
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/api/admin/login",
                                 "/api/admin/register",
                                 "/api/admin/refresh",
                                 "/images/**",
-                                "/api/upload",
-                                "/uploads/**"
+                                "/uploads/**",
+                                "/health"
                                 // 이미지 업로드 API에 대한 인증 허용
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll() // 조회는 누구나

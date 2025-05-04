@@ -26,15 +26,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-
+        String uri2 = request.getRequestURI();
         String path = request.getServletPath();
 
+        if ("/health".equals(uri2)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         if (request.getMethod().equals("GET")) {
             filterChain.doFilter(request, response);
             return;
         }
-
 
         if (path.equals("/api/admin/login") || path.equals("/api/admin/refresh")) {
             filterChain.doFilter(request, response);
@@ -65,9 +68,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
         }
     }
-
-
-
 
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");

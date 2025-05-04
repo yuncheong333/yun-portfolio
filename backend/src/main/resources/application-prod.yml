@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?user=postgres.mehkisqyrrvltakjepki
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      validation-timeout: 3000
+      idle-timeout: 60000
+      max-lifetime: 1800000
+      keepalive-time: 300000
+      leak-detection-threshold: 30000
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    root: INFO
+    com.yuncheong.backend: INFO
+  file:
+    name: logs/application.log
+
+cloudinary:
+  cloud-name: doptvzhhe
+  api-key: 315635887927954
+  api-secret: ${IMG_SECRET}
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000
+  remember-me-expiration: 2592000000
+  refresh-expiration: 604800000
