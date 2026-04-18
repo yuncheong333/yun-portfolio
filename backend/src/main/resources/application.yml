@@ -3,8 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?user=postgres.mehkisqyrrvltakjepki
-    password: qrwe1423qrwe
+    url: jdbc:postgresql://://supabase.com
+    username: postgres.fllmsaitmpjsjixmcneu
+    password: yshwan9855*
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5
@@ -14,10 +15,15 @@ spring:
       max-lifetime: 1800000
       keepalive-time: 300000
       leak-detection-threshold: 30000
+      devtools:
+        restart:
+          enabled: false
+
   servlet:
     multipart:
      max-file-size: 30MB
      max-request-size: 30MB
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -31,7 +37,6 @@ logging:
   file:
     name: logs/application.log
 
-
 cloudinary:
   cloud-name: doptvzhhe
   api-key: 315635887927954
@@ -42,4 +47,3 @@ jwt:
   expiration: 86400000  # 24시간 (ms)
   remember-me-expiration: 2592000000  # 30일 (ms)
   refresh-expiration: 604800000 # 7일 (ms)
-

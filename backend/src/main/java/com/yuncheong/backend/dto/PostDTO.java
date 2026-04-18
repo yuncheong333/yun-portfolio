@@ -13,7 +13,7 @@ public class PostDTO {
     public static class Request {
         private String title;
         private String content;
-        private String author;
+        private Integer author;
     }
 
     @Data
@@ -24,7 +24,7 @@ public class PostDTO {
         private Long id;
         private String title;
         private String content;
-        private String author;
+        private Integer author;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
     }
