@@ -121,7 +121,7 @@ const MenuBar: React.FC<MenuBarProps> = ({editor}) => {
 
                                     try {
                                         const res = await api.post(
-                                            `${process.env.REACT_APP_API_URL}/api/upload`,
+                                            `/api/upload`,
                                             formData,
                                             {
                                                 headers: {

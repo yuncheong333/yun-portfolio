@@ -28,7 +28,7 @@ public class PostEntity {
     private String content;
 
     @Column
-    private String author;
+    private Integer author;
 
     @CreatedDate
     @Column(updatable = false)
@@ -37,7 +37,7 @@ public class PostEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public void update(String title, String content, String author) {
+    public void update(String title, String content, Integer author) {
         this.title = title;
         this.content = content;
         this.author = author;
