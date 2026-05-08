@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://://supabase.com
+    url: jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:6543/postgres
     username: postgres.fllmsaitmpjsjixmcneu
     password: yshwan9855*
     driver-class-name: org.postgresql.Driver
@@ -38,7 +38,7 @@ logging:
     name: logs/application.log
 
 cloudinary:
-  cloud-name: doptvzhhe
+  cloud-name: doptvzhhe`
   api-key: 315635887927954
   api-secret: seyAGPWCTVQIWrVm1LYklmrUHoQ
 
